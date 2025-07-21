@@ -23,7 +23,7 @@ export const PlayerPanel = ({
 
   return (
     <motion.div
-      className={`game-card p-6 ${bgGradient} ${player.isActive ? `${borderColor} border-2` : ''} 
+      className={`game-card p-3 sm:p-6 ${bgGradient} ${player.isActive ? `${borderColor} border-2` : ''} 
                   ${isLastChance ? 'ring-2 ring-battle-danger ring-opacity-75' : ''} ${className}`}
       animate={{
         scale: player.isActive ? 1.05 : 1,
@@ -35,7 +35,7 @@ export const PlayerPanel = ({
     >
       {/* Player Name */}
       <motion.h3 
-        className={`text-xl font-bold mb-3 text-${playerColorClass}`}
+        className={`text-base sm:text-xl font-bold mb-2 sm:mb-3 text-${playerColorClass}`}
         animate={{ 
           color: player.isActive ? `hsl(var(--${playerColorClass}))` : 'hsl(var(--foreground))' 
         }}
@@ -54,8 +54,8 @@ export const PlayerPanel = ({
       </motion.h3>
 
       {/* Lives */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-sm font-medium text-muted-foreground">Lives:</span>
+      <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
+        <span className="text-xs sm:text-sm font-medium text-muted-foreground">Lives:</span>
         <div className="flex gap-1">
           {Array.from({ length: 3 }, (_, index) => (
             <motion.div
@@ -79,10 +79,10 @@ export const PlayerPanel = ({
       </div>
 
       {/* Score */}
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium text-muted-foreground">Score:</span>
+      <div className="flex items-center gap-1 sm:gap-2">
+        <span className="text-xs sm:text-sm font-medium text-muted-foreground">Score:</span>
         <motion.span 
-          className={`text-lg font-bold text-${playerColorClass}`}
+          className={`text-base sm:text-lg font-bold text-${playerColorClass}`}
           key={player.score}
           initial={{ scale: 1.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

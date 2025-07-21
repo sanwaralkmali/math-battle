@@ -6,7 +6,7 @@ import { VictoryScreen } from './game/VictoryScreen';
 import { Skill } from '@/types/game';
 
 export const MathBattleGame = () => {
-  const { gameState, initializeGame, handleAnswer, resetGame } = useGameState();
+  const { gameState, initializeGame, handleAnswer, resetGame, decrementTimer, triggerMissedAttack } = useGameState();
   const [gameStartTime, setGameStartTime] = useState<number>(0);
   const [gameDuration, setGameDuration] = useState<number>(0);
 
@@ -55,6 +55,8 @@ export const MathBattleGame = () => {
         <BattleScreen 
           gameState={gameState} 
           onAnswer={handleAnswer}
+          decrementTimer={decrementTimer}
+          triggerMissedAttack={triggerMissedAttack}
         />
       );
     

@@ -33,8 +33,9 @@ export const AttackAnimation = ({ fromPlayer, isVisible, onComplete }: AttackAni
         className="absolute w-8 h-8 rounded-full bg-gradient-to-r from-orange-400 to-red-500 
                    shadow-lg shadow-orange-500/50"
         style={{
-          left: fromPlayer === 1 ? '20%' : '80%',
-          top: '50%'
+          left: fromPlayer === 1 ? '10%' : '90%', // closer to player card
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
         }}
         initial={{ 
           scale: 0,
@@ -43,7 +44,7 @@ export const AttackAnimation = ({ fromPlayer, isVisible, onComplete }: AttackAni
         }}
         animate={{ 
           scale: [0, 1.2, 1],
-          x: fromPlayer === 1 ? '200px' : '-200px',
+          x: fromPlayer === 1 ? '60vw' : '-60vw', // travel across the screen
           y: [0, -30, 0]
         }}
         transition={{ 
@@ -79,7 +80,7 @@ export const AttackAnimation = ({ fromPlayer, isVisible, onComplete }: AttackAni
         <motion.div
           className="absolute"
           style={{
-            left: fromPlayer === 1 ? '60%' : '40%',
+            left: fromPlayer === 1 ? '90%' : '10%', // target the other card
             top: '50%',
             transform: 'translate(-50%, -50%)'
           }}

@@ -101,7 +101,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-2 sm:p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -110,23 +110,23 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
       >
         {/* Header */}
         <motion.div 
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-battle-primary to-battle-secondary 
-                         bg-clip-text text-transparent mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-battle-primary to-battle-secondary 
+                         bg-clip-text text-transparent mb-2 sm:mb-4">
             MathBattle
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-base sm:text-xl text-muted-foreground">
             Challenge your friends in mathematical combat!
           </p>
         </motion.div>
 
         <Card className="game-card">
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2 text-2xl">
+            <CardTitle className="flex items-center justify-center gap-2 text-lg sm:text-2xl">
               <Users className="w-6 h-6 text-battle-primary" />
               Game Setup
             </CardTitle>
@@ -135,22 +135,22 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
             </CardDescription>
           </CardHeader>
           
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6">
             {/* Player Names */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-2 sm:gap-4">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <label className="block text-sm font-medium mb-2 text-player-1">
+                <label className="block text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-player-1">
                   Player 1 (Blue)
                 </label>
                 <Input
                   placeholder="Enter player 1 name"
                   value={player1Name}
                   onChange={(e) => setPlayer1Name(e.target.value)}
-                  className="border-player-1/30 focus:border-player-1"
+                  className="border-player-1/30 focus:border-player-1 text-xs sm:text-base py-2 sm:py-3"
                 />
               </motion.div>
               
@@ -159,14 +159,14 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <label className="block text-sm font-medium mb-2 text-player-2">
+                <label className="block text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-player-2">
                   Player 2 (Orange)
                 </label>
                 <Input
                   placeholder="Enter player 2 name"
                   value={player2Name}
                   onChange={(e) => setPlayer2Name(e.target.value)}
-                  className="border-player-2/30 focus:border-player-2"
+                  className="border-player-2/30 focus:border-player-2 text-xs sm:text-base py-2 sm:py-3"
                 />
               </motion.div>
             </div>
@@ -177,12 +177,12 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <label className="block text-sm font-medium mb-3">
+              <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3">
                 {category && filteredSkillKeys.length > 0
                   ? `Choose Math Challenge (${category.replace(/-/g, ' ')})`
                   : 'Choose Math Challenge'}
               </label>
-              <div className="grid md:grid-cols-2 gap-3">
+              <div className="grid md:grid-cols-2 gap-2 sm:gap-3">
                 {filteredSkillKeys.map((skillKey) => {
                   const skill = skills[skillKey];
                   if (!skill) return null;
@@ -200,16 +200,13 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
                         }`}
                         onClick={() => setSelectedSkill(skillKey)}
                       >
-                        <CardContent className="p-4">
-                          <h3 className="font-semibold mb-1">{skill.title}</h3>
-                          <p className="text-sm text-muted-foreground mb-2">
+                        <CardContent className="p-2 sm:p-4">
+                          <h3 className="font-semibold mb-1 text-sm sm:text-base">{skill.title}</h3>
+                          <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                             {skill.description}
                           </p>
-                          <div className="flex gap-2">
-                            <Badge variant="secondary">
-                              {skill.questions.length} questions
-                            </Badge>
-                            <Badge variant="outline">
+                          <div className="flex gap-1 sm:gap-2">
+                            <Badge variant="outline" className="text-xs sm:text-sm">
                               {skill.timePerQuestion}s per question
                             </Badge>
                           </div>
@@ -223,7 +220,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
 
             {/* Action Buttons */}
             <motion.div 
-              className="flex gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-2 sm:pt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -231,7 +228,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
               <Button
                 onClick={handleStartGame}
                 disabled={!canStartGame}
-                className="flex-1 h-12 text-lg font-semibold battle-gradient hover:opacity-90"
+                className="flex-1 h-10 sm:h-12 text-base sm:text-lg font-semibold battle-gradient hover:opacity-90"
               >
                 <Play className="w-5 h-5 mr-2" />
                 Start Battle!
@@ -239,45 +236,45 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
               
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" size="lg">
+                  <Button variant="outline" size="sm" className="h-10 sm:h-12 px-4 sm:px-6">
                     <HelpCircle className="w-5 h-5" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>How to Play MathBattle</DialogTitle>
+                    <DialogTitle className="text-lg sm:text-2xl">How to Play MathBattle</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">1</div>
-                      <p>Each player starts with 3 lives (hearts)</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">1</div>
+                      <p className="text-sm sm:text-base">Each player starts with 3 lives (hearts)</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">2</div>
-                      <p>Players take turns answering math questions</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">2</div>
+                      <p className="text-sm sm:text-base">Players take turns answering math questions</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">3</div>
-                      <p>Correct answer = Attack! Remove 1 life from opponent</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">3</div>
+                      <p className="text-sm sm:text-base">Correct answer = Attack! Remove 1 life from opponent</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">4</div>
-                      <p>Wrong answer or timeout = Missed attack</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">4</div>
+                      <p className="text-sm sm:text-base">Wrong answer or timeout = Missed attack</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">5</div>
-                      <p>When a player reaches 0 lives, they get one "Last Chance"</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">5</div>
+                      <p className="text-sm sm:text-base">When a player reaches 0 lives, they get one "Last Chance"</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold">6</div>
-                      <p>After 10 questions, enter Sudden Death mode!</p>
+                      <div className="w-6 h-6 rounded-full bg-battle-primary text-white text-sm flex items-center justify-center font-bold flex-shrink-0">6</div>
+                      <p className="text-sm sm:text-base">After 10 questions, enter Sudden Death mode!</p>
                     </div>
                   </div>
                 </DialogContent>
               </Dialog>
 
               <LeaderboardModal>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="sm" className="h-10 sm:h-12 px-4 sm:px-6">
                   <Trophy className="w-5 h-5" />
                 </Button>
               </LeaderboardModal>

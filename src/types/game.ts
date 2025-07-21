@@ -4,6 +4,11 @@ export interface Question {
   options: string[];
   correct: number;
 }
+export type RawQuestion = Question & {
+  wave?: number;
+  choices?: string[];
+  answer?: string;
+};
 
 export interface Skill {
   title: string;
@@ -18,6 +23,7 @@ export interface Player {
   lives: number;
   score: number;
   isActive: boolean;
+  answerTime?: number;
 }
 
 export interface GameState {

@@ -95,6 +95,7 @@ export const VictoryScreen = ({
 
   const winnerRating = getPerformanceRating(winner.score, gameState.questions.length);
   const loserRating = getPerformanceRating(loser.score, gameState.questions.length);
+  const isSuddenDeath = gameState.gameMode === 'sudden-death' || (winner.answerTime !== undefined && loser.answerTime !== undefined);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-orange-50 flex items-center justify-center p-4">
@@ -146,13 +147,13 @@ export const VictoryScreen = ({
             <div className="grid md:grid-cols-2 gap-6">
               {/* Winner Stats */}
               <motion.div
-                className="text-center p-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg border-2 border-yellow-200"
+                className="text-center p-2 sm:p-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg border-2 border-yellow-200"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 <Trophy className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
-                <h3 className="font-bold text-lg mb-2">{winner.name}</h3>
+                <h3 className="font-bold text-base sm:text-lg mb-1 sm:mb-2">{winner.name}</h3>
                 <div className="space-y-2">
                   <Badge className="bg-yellow-500 text-white">
                     Winner - {winner.score} points
@@ -172,12 +173,17 @@ export const VictoryScreen = ({
                       />
                     ))}
                   </div>
+                  {isSuddenDeath && winner.answerTime && (
+                    <div className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                      SD Time: <span className="font-bold text-battle-success">{winner.answerTime.toFixed(2)}s</span>
+                    </div>
+                  )}
                 </div>
               </motion.div>
 
               {/* Loser Stats */}
               <motion.div
-                className="text-center p-4 bg-muted/30 rounded-lg border"
+                className="text-center p-2 sm:p-4 bg-muted/30 rounded-lg border"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
@@ -185,7 +191,7 @@ export const VictoryScreen = ({
                 <div className="w-8 h-8 bg-muted rounded-full mx-auto mb-2 flex items-center justify-center text-sm font-bold">
                   2
                 </div>
-                <h3 className="font-bold text-lg mb-2">{loser.name}</h3>
+                <h3 className="font-bold text-base sm:text-lg mb-1 sm:mb-2">{loser.name}</h3>
                 <div className="space-y-2">
                   <Badge variant="secondary">
                     {loser.score} points
@@ -205,6 +211,11 @@ export const VictoryScreen = ({
                       />
                     ))}
                   </div>
+                  {isSuddenDeath && loser.answerTime && (
+                    <div className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                      SD Time: <span className="font-bold">{loser.answerTime.toFixed(2)}s</span>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </div>
@@ -216,17 +227,17 @@ export const VictoryScreen = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 text-center">
                 <div>
-                  <p className="text-sm text-muted-foreground">Duration</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Duration</p>
                   <p className="font-mono font-semibold">{formatTime(gameDuration)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Questions</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Questions</p>
                   <p className="font-semibold">{gameState.currentQuestionIndex + 1}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Subject</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Subject</p>
                   <p className="font-semibold">{gameState.skill?.title}</p>
                 </div>
               </div>
@@ -236,23 +247,22 @@ export const VictoryScreen = ({
 
         {/* Action Buttons */}
         <motion.div 
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
           <Button
             onClick={onRematch}
-            className="flex-1 h-12 text-lg font-semibold battle-gradient hover:opacity-90"
+            className="flex-1 h-10 sm:h-12 text-base sm:text-lg font-semibold battle-gradient hover:opacity-90"
           >
             <RotateCcw className="w-5 h-5 mr-2" />
             Rematch
           </Button>
-          
           <Button
             onClick={onReturnHome}
             variant="outline"
-            className="h-12 px-6"
+            className="flex-1 h-10 sm:h-12 px-4 sm:px-6 text-base sm:text-lg"
           >
             <Home className="w-5 h-5 mr-2" />
             New Game

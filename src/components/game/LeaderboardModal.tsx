@@ -41,9 +41,9 @@ export const LeaderboardModal = ({ children }: LeaderboardModalProps) => {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-md sm:max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-2xl">
+          <DialogTitle className="flex items-center gap-2 text-lg sm:text-2xl">
             <Trophy className="w-6 h-6 text-battle-primary" />
             Leaderboard
           </DialogTitle>
@@ -57,15 +57,15 @@ export const LeaderboardModal = ({ children }: LeaderboardModalProps) => {
               animate={{ opacity: 1 }}
             >
               <Trophy className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <p className="text-lg text-muted-foreground">No games played yet!</p>
-              <p className="text-sm text-muted-foreground">Start battling to see your stats here.</p>
+              <p className="text-base sm:text-lg text-muted-foreground">No games played yet!</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Start battling to see your stats here.</p>
             </motion.div>
           ) : (
             <div className="space-y-2">
               {sortedLeaderboard.map((entry, index) => (
                 <motion.div
                   key={`${entry.playerName}-${entry.date}`}
-                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                  className={`p-2 sm:p-4 rounded-lg border transition-all duration-200 ${
                     index < 3 
                       ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' 
                       : 'bg-muted/30 border-border'
@@ -79,12 +79,12 @@ export const LeaderboardModal = ({ children }: LeaderboardModalProps) => {
                     <div className="flex items-center gap-3">
                       {getRankIcon(index)}
                       <div>
-                        <h3 className="font-semibold text-lg">{entry.playerName}</h3>
-                        <div className="flex gap-2 mt-1">
-                          <Badge variant={index < 3 ? 'default' : 'secondary'}>
+                        <h3 className="font-semibold text-sm sm:text-lg">{entry.playerName}</h3>
+                        <div className="flex flex-wrap gap-1 sm:gap-2 mt-1">
+                          <Badge variant={index < 3 ? 'default' : 'secondary'} className="text-xs">
                             {(entry.winRate * 100).toFixed(0)}% Win Rate
                           </Badge>
-                          <Badge variant="outline">
+                          <Badge variant="outline" className="text-xs">
                             {entry.wins}W / {entry.gamesPlayed - entry.wins}L
                           </Badge>
                         </div>
@@ -92,8 +92,8 @@ export const LeaderboardModal = ({ children }: LeaderboardModalProps) => {
                     </div>
                     
                     <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Best Time</p>
-                      <p className="font-mono font-semibold">{formatTime(entry.bestTime)}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Best Time</p>
+                      <p className="font-mono font-semibold text-sm sm:text-base">{formatTime(entry.bestTime)}</p>
                     </div>
                   </div>
                 </motion.div>

@@ -1,4 +1,3 @@
 {
-  "basic-operations": ["integers", "fractions"],
-  "advanced-operations": ["geometry", "algebra"]
+  "basic-operations": ["integers", "fractions","decimals","mixed-problems", "order-of-operations"]
 }
