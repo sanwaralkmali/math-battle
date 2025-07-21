@@ -9,5 +9,12 @@
   "algebra-builder":
   [
     "algebra-basics"
+  ],
+  "rational-conversion":
+  [
+    "fraction-decimal",
+    "fraction-percentage", 
+    "decimal-percentage",
+    "mixed-conversion"
   ]
 } 
