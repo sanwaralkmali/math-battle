@@ -1,6 +1,6 @@
 {
-    "title": "Algebra Builder: 5-Wave Challenge",
-    "description": "Drag each algebraic item into its correct category: Variable, Constant, Expression, or Equation. Each wave adds speed and trickier items—see if you can master all five!",
+    "title": "Algebra Builder",
+    "description": " ",
     "waves": 5,
     "timePerQuestion": 20,
     "questions": [

@@ -27,7 +27,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   useEffect(() => {
     // Parse query parameter for skill category
     const params = new URLSearchParams(location.search);
-    const cat = params.get('skills');
+    const cat = params.get('skill');
     setCategory(cat);
   }, [location.search]);
 
@@ -74,7 +74,9 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
         setFilteredSkillKeys(skillCategories[category]);
       } else {
         // Show all skills if no category
-        setFilteredSkillKeys(Object.keys(skills));
+        // Flatten all skill arrays from all categories
+        const allSkillKeys = Object.values(skillCategories).flat();
+        setFilteredSkillKeys(allSkillKeys);
       }
     };
     fetchCategories();

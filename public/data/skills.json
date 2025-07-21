@@ -6,9 +6,9 @@
     "order-of-operations",
     "mixed-problems"
   ],
-  "Algebra":
+  "algebra-builder":
   [
-    "algebra-builder",
+    "algebra-basics",
     "one-tep-equations"
   ]
 } 
