@@ -5,5 +5,10 @@
     "decimals",
     "order-of-operations",
     "mixed-problems"
+  ],
+  "Algebra":
+  [
+    "algebra-builder",
+    "one-tep-equations"
   ]
 } 
