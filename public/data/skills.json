@@ -1,1 +1,9 @@
- 
+{
+  "basic-operations": [
+    "integers",
+    "fractions",
+    "decimals",
+    "order-of-operations",
+    "mixed-problems"
+  ]
+} 
