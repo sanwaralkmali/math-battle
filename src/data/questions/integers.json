@@ -1,0 +1,68 @@
+{
+  "title": "Integer Operations",
+  "description": "Practice basic integer math",
+  "waves": 1,
+  "timePerQuestion": 25,
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is 15 + 23?",
+      "options": ["38", "35", "40", "33"],
+      "correct": 0
+    },
+    {
+      "id": 2,
+      "question": "What is 84 - 29?",
+      "options": ["65", "55", "59", "45"],
+      "correct": 1
+    },
+    {
+      "id": 3,
+      "question": "What is 12 × 7?",
+      "options": ["74", "84", "94", "64"],
+      "correct": 1
+    },
+    {
+      "id": 4,
+      "question": "What is 96 ÷ 8?",
+      "options": ["11", "12", "13", "14"],
+      "correct": 1
+    },
+    {
+      "id": 5,
+      "question": "What is -15 + 28?",
+      "options": ["13", "-13", "43", "-43"],
+      "correct": 0
+    },
+    {
+      "id": 6,
+      "question": "What is 7 × (-4)?",
+      "options": ["28", "-28", "11", "-11"],
+      "correct": 1
+    },
+    {
+      "id": 7,
+      "question": "What is (-36) ÷ (-6)?",
+      "options": ["-6", "6", "-42", "42"],
+      "correct": 1
+    },
+    {
+      "id": 8,
+      "question": "What is 45 - 67?",
+      "options": ["22", "-22", "112", "-112"],
+      "correct": 1
+    },
+    {
+      "id": 9,
+      "question": "What is 8 + (-15)?",
+      "options": ["7", "-7", "23", "-23"],
+      "correct": 1
+    },
+    {
+      "id": 10,
+      "question": "What is (-9) × (-6)?",
+      "options": ["-54", "54", "-15", "15"],
+      "correct": 1
+    }
+  ]
+}

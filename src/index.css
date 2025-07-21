@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* MathBattle Game Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Game Theme Colors */
+    --background: 240 15% 98%;
+    --foreground: 240 20% 8%;
+    
+    /* Battle System Colors */
+    --battle-primary: 217 91% 60%;     /* Vibrant Blue */
+    --battle-secondary: 25 95% 53%;    /* Energetic Orange */
+    --battle-success: 142 71% 45%;     /* Victory Green */
+    --battle-danger: 0 84% 60%;        /* Attack Red */
+    --battle-warning: 45 93% 58%;      /* Caution Yellow */
+    
+    /* Player Colors */
+    --player-1: 217 91% 60%;           /* Blue Player */
+    --player-2: 25 95% 53%;            /* Orange Player */
+    
+    /* Game UI */
+    --game-card: 0 0% 100%;
+    --game-card-border: 240 15% 90%;
+    --game-highlight: 217 91% 95%;
+    --game-muted: 240 10% 96%;
+
+    --card: var(--game-card);
+    --card-foreground: var(--foreground);
+
+    --popover: var(--game-card);
+    --popover-foreground: var(--foreground);
+
+    --primary: var(--battle-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--game-muted);
+    --secondary-foreground: var(--foreground);
+
+    --muted: var(--game-muted);
+    --muted-foreground: 240 10% 50%;
+
+    --accent: var(--game-highlight);
+    --accent-foreground: var(--battle-primary);
+
+    --destructive: var(--battle-danger);
+    --destructive-foreground: 0 0% 100%;
+
+    --border: var(--game-card-border);
+    --input: var(--game-card-border);
+    --ring: var(--battle-primary);
+
+    --radius: 0.75rem;
+    
+    /* Game-specific gradients */
+    --gradient-battle: linear-gradient(135deg, hsl(var(--battle-primary)), hsl(var(--battle-secondary)));
+    --gradient-victory: linear-gradient(135deg, hsl(var(--battle-success)), hsl(var(--battle-warning)));
+    --gradient-danger: linear-gradient(135deg, hsl(var(--battle-danger)), hsl(25 95% 63%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--game-card)), hsl(240 15% 95%));
+    
+    /* Game shadows */
+    --shadow-game: 0 10px 30px -10px hsl(var(--battle-primary) / 0.2);
+    --shadow-battle: 0 20px 40px -15px hsl(var(--battle-primary) / 0.4);
+    --shadow-attack: 0 0 30px hsl(var(--battle-danger) / 0.6);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-cairo;
+  }
+
+  /* Game-specific animations */
+  @keyframes attack-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  @keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  @keyframes victory-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--battle-success) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--battle-success) / 0.6); }
+  }
+  
+  @keyframes timer-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Game utility classes */
+  .game-card {
+    @apply bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-xl shadow-lg;
+  }
+  
+  .battle-gradient {
+    background: var(--gradient-battle);
+  }
+  
+  .victory-gradient {
+    background: var(--gradient-victory);
+  }
+  
+  .attack-animation {
+    animation: attack-flash 0.3s ease-in-out;
+  }
+  
+  .heart-animation {
+    animation: heart-beat 0.6s ease-in-out infinite;
+  }
+}

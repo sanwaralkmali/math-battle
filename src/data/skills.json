@@ -1,0 +1,4 @@
+{
+  "basic-operations": ["integers", "fractions"],
+  "advanced-operations": ["geometry", "algebra"]
+}
