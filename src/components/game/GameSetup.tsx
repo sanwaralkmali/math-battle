@@ -35,7 +35,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
     const loadSkills = async () => {
       try {
         // Load available skills
-        const skillsResponse = await fetch('/src/data/skills.json');
+        const skillsResponse = await fetch('/data/skills.json');
         const skillCategories = await skillsResponse.json();
         
         const loadedSkills: Record<string, Skill> = {};
@@ -44,7 +44,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
         for (const category of Object.values(skillCategories)) {
           for (const skillName of category as string[]) {
             try {
-              const skillResponse = await fetch(`/src/data/questions/${skillName}.json`);
+              const skillResponse = await fetch(`/data/questions/${skillName}.json`);
               const skillData = await skillResponse.json();
               loadedSkills[skillName] = skillData;
             } catch (error) {
@@ -68,7 +68,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   const [filteredSkillKeys, setFilteredSkillKeys] = useState<string[]>([]);
   useEffect(() => {
     const fetchCategories = async () => {
-      const skillsResponse = await fetch('/src/data/skills.json');
+      const skillsResponse = await fetch('/data/skills.json');
       const skillCategories = await skillsResponse.json();
       if (category && skillCategories[category]) {
         setFilteredSkillKeys(skillCategories[category]);
