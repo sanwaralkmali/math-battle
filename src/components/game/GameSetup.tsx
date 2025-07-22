@@ -189,32 +189,32 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
                   const skill = skills[skillKey];
                   if (!skill) return null;
                   return (
-                    <motion.div
-                      key={skillKey}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                  <motion.div
+                    key={skillKey}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Card 
+                      className={`cursor-pointer transition-all duration-200 ${
+                        selectedSkill === skillKey 
+                          ? 'ring-2 ring-battle-primary bg-battle-primary/5' 
+                          : 'hover:shadow-md'
+                      }`}
+                      onClick={() => setSelectedSkill(skillKey)}
                     >
-                      <Card
-                        className={`cursor-pointer transition-all duration-200 ${
-                          selectedSkill === skillKey
-                            ? 'ring-2 ring-battle-primary bg-battle-primary/5'
-                            : 'hover:shadow-md'
-                        }`}
-                        onClick={() => setSelectedSkill(skillKey)}
-                      >
                         <CardContent className="p-2 sm:p-4">
                           <h3 className="font-semibold mb-1 text-sm sm:text-base">{skill.title}</h3>
                           <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
-                            {skill.description}
-                          </p>
+                          {skill.description}
+                        </p>
                           <div className="flex gap-1 sm:gap-2">
                             <Badge variant="outline" className="text-xs sm:text-sm">
-                              {skill.timePerQuestion}s per question
-                            </Badge>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
+                            {skill.timePerQuestion}s per question
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                   );
                 })}
               </div>

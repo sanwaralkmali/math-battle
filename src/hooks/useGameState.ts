@@ -87,15 +87,15 @@ export const useGameState = () => {
 
   // Decrement timer by 1 (to be called by UI interval)
   const decrementTimer = useCallback(() => {
-    setGameState(prev => {
-      if (prev.timeRemaining <= 1) {
-        // Time's up - missed attack
-        return handleMissedAttack(prev);
-      }
-      return { ...prev, timeRemaining: prev.timeRemaining - 1 };
-    });
+      setGameState(prev => {
+        if (prev.timeRemaining <= 1) {
+          // Time's up - missed attack
+          return handleMissedAttack(prev);
+        }
+        return { ...prev, timeRemaining: prev.timeRemaining - 1 };
+      });
   }, []);
-
+    
   // Expose missed attack trigger for UI
   const triggerMissedAttack = useCallback(() => {
     setGameState(prev => handleMissedAttack(prev));
@@ -106,7 +106,7 @@ export const useGameState = () => {
     const nextQuestionIndex = state.currentQuestionIndex + 1;
     let newGameMode = state.gameMode;
     let newWinner = state.winner;
-
+    
     // Check for game end after 10 questions
     if (nextQuestionIndex >= MAX_QUESTIONS) {
       if (state.players[0].lives > state.players[1].lives) {
@@ -117,29 +117,29 @@ export const useGameState = () => {
         newGameMode = 'victory';
       } else {
         newGameMode = 'sudden-death';
-      }
+    }
     }
 
     // If game continues, update state
     if (newGameMode !== 'victory') {
-      return {
-        ...state,
-        currentPlayerIndex: nextPlayerIndex,
-        currentQuestionIndex: nextQuestionIndex,
-        timeRemaining: state.skill?.timePerQuestion || 25,
-        players: state.players.map((player, index) => ({
-          ...player,
-          isActive: index === nextPlayerIndex
+    return {
+      ...state,
+      currentPlayerIndex: nextPlayerIndex,
+      currentQuestionIndex: nextQuestionIndex,
+      timeRemaining: state.skill?.timePerQuestion || 25,
+      players: state.players.map((player, index) => ({
+        ...player,
+        isActive: index === nextPlayerIndex
         })) as [Player, Player],
         gameMode: newGameMode,
         winner: newWinner
-      };
+    };
     }
     // If game ended, just update mode and winner
     return { ...state, gameMode: newGameMode, winner: newWinner };
   }, []);
 
-
+    
   const handleAnswer = useCallback((selectedAnswer: number, timeTaken?: number) => {
     setGameState(prev => {
       const currentQuestion = prev.questions[prev.currentQuestionIndex];
@@ -248,11 +248,11 @@ export const useGameState = () => {
           newGameMode = 'victory';
         }
       }
-      
+
       // Move to next turn
       const nextPlayerIndex = 1 - currentPlayerIndex;
       const nextQuestionIndex = prev.currentQuestionIndex + 1;
-
+      
       // Check for end of normal game (after 10 questions)
       if (newGameMode !== 'victory' && nextQuestionIndex >= MAX_QUESTIONS) {
         if (newPlayers[0].lives > newPlayers[1].lives) {
@@ -271,7 +271,7 @@ export const useGameState = () => {
             newGameMode = 'victory';
           } else {
             // Tie in lives and score, start sudden death
-            newGameMode = 'sudden-death';
+        newGameMode = 'sudden-death';
           }
         }
       }

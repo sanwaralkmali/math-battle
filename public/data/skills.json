@@ -16,5 +16,14 @@
     "fraction-percentage", 
     "decimal-percentage",
     "mixed-conversion"
+  ],
+  "classification-numbers":
+  [
+    "classification-numbers"
+  ],
+  "scientific-notation":
+  [
+    "basic-scientific-notation",
+    "operations-scientific-notation"
   ]
 } 

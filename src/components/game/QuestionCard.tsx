@@ -56,7 +56,7 @@ export const QuestionCard = ({
 
   return (
     <motion.div
-      className={`game-card p-4 sm:p-8 max-w-2xl mx-auto ${className}`}
+      className={`game-card p-4 sm:p-8 max-w-2xl lg:max-w-3xl mx-auto ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -50 }}
@@ -92,7 +92,7 @@ export const QuestionCard = ({
 
       {/* Question */}
       <motion.h2 
-        className="text-lg sm:text-2xl font-bold mb-4 sm:mb-8 text-center leading-relaxed"
+        className="text-lg sm:text-2xl font-bold mb-4 sm:mb-8 text-center leading-relaxed max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -114,28 +114,28 @@ export const QuestionCard = ({
             }
           }
           return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 + index * 0.1 }}
               whileHover={selected === null ? { scale: 1.02 } : {}}
               whileTap={selected === null ? { scale: 0.98 } : {}}
-            >
-              <Button
+          >
+            <Button
                 variant={btnColor as ButtonProps['variant']}
-                className={`w-full p-3 sm:p-6 h-auto text-left justify-start text-base sm:text-lg font-medium transition-all duration-200 group ${selected !== null ? 'pointer-events-none opacity-90' : ''}`}
+                className={`w-full max-w-full p-3 sm:p-6 h-auto text-left justify-start text-base sm:text-lg font-medium transition-all duration-200 group ${selected !== null ? 'pointer-events-none opacity-90' : ''}`}
                 onClick={() => handleAnswer(index)}
                 disabled={selected !== null}
-              >
+            >
                 <span className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 text-sm font-bold ${
                   btnColor === 'battle' ? 'bg-battle-primary text-white' : btnColor === 'destructive' ? 'bg-battle-danger text-white' : 'bg-muted'
                 }`}>
-                  {String.fromCharCode(65 + index)}
-                </span>
-                {option}
-              </Button>
-            </motion.div>
+                {String.fromCharCode(65 + index)}
+              </span>
+              <span className="break-words whitespace-normal">{option}</span>
+            </Button>
+          </motion.div>
           );
         })}
       </div>

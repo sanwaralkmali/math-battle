@@ -86,7 +86,7 @@ export const BattleScreen = ({ gameState, onAnswer, decrementTimer, triggerMisse
     const timeTaken = (Date.now() - questionStartTime.current) / 1000; // in seconds
     if (correct) {
       setAttackingPlayer((gameState.currentPlayerIndex + 1) as 1 | 2);
-      setShowAttack(true);
+        setShowAttack(true);
       setPendingAnswer(answer);
       setPendingCorrect(true);
       // Wait for animation, then call onAnswer
