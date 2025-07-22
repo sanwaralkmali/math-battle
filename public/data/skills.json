@@ -21,9 +21,12 @@
   [
     "classification-numbers"
   ],
-  "scientific-notation":
+  "basic-scientific-notation":
   [
-    "basic-scientific-notation",
+    "basic-scientific-notation"
+  ],
+  "operations-scientific-notation":
+  [
     "operations-scientific-notation"
   ]
 } 
