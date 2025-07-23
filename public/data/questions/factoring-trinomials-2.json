@@ -2,7 +2,7 @@
   "title": "Factoring Trinomials (ax² + bx + c)",
   "description": "Factor each trinomial of the form ax² + bx + c.",
   "waves": 5,
-  "timePerQuestion": 15,
+  "timePerQuestion": 180,
   "questions": [
     {
       "id": 1,
