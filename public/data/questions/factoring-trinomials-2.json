@@ -1,6 +1,6 @@
 {
-  "title": "Factoring Trinomials (ax² + bx + c) – 250 Unique Questions",
-  "description": "Factor each trinomial of the form ax² + bx + c.  All choices are distinct; difficulty rises gradually.",
+  "title": "Factoring Trinomials (ax² + bx + c)",
+  "description": "Factor each trinomial of the form ax² + bx + c.",
   "waves": 5,
   "timePerQuestion": 15,
   "questions": [
