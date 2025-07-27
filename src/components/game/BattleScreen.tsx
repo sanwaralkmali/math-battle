@@ -6,6 +6,7 @@ import { AttackAnimation } from "./AttackAnimation";
 import { GameState } from "@/types/game";
 import { useGameState } from "@/hooks/useGameState";
 import { useToast } from "@/hooks/use-toast";
+import { Zap, Target, Trophy, Star, Calculator, Brain } from "lucide-react";
 
 interface BattleScreenProps {
   gameState: GameState;
@@ -121,12 +122,48 @@ export const BattleScreen = ({
   if (!currentQuestion) {
     if (gameState.gameMode === "sudden-death") {
       return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">
-              Sudden Death! Fastest answer wins!
+        <div className="h-full flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-4xl text-red-500/20"
+                initial={{ 
+                  x: Math.random() * window.innerWidth,
+                  y: -50,
+                  rotate: 0
+                }}
+                animate={{ 
+                  y: window.innerHeight + 50,
+                  rotate: 360,
+                  x: Math.random() * window.innerWidth
+                }}
+                transition={{ 
+                  duration: 8 + Math.random() * 4,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
+                ⚡
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="text-center relative z-10">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="mb-4"
+            >
+              <Zap className="w-16 h-16 text-red-500 mx-auto" />
+            </motion.div>
+            <h2 className="text-3xl font-bold mb-4 text-red-600">
+              ⚡ Sudden Death! ⚡
             </h2>
-            {/* You can add a sudden death UI here if needed */}
+            <p className="text-xl text-red-500 font-semibold">
+              Fastest answer wins!
+            </p>
           </div>
         </div>
       );
@@ -135,7 +172,7 @@ export const BattleScreen = ({
       return null; // Parent will render VictoryScreen
     }
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">
             No more questions available.
@@ -146,17 +183,120 @@ export const BattleScreen = ({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 p-4 flex flex-col items-center justify-center">
+    <div className="h-full bg-gradient-to-br from-blue-50 via-white to-orange-50 p-2 sm:p-4 flex flex-col relative overflow-hidden">
+      {/* Animated background math symbols */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-2xl sm:text-3xl text-blue-400/10"
+            initial={{ 
+              x: Math.random() * window.innerWidth,
+              y: -50,
+              rotate: 0
+            }}
+            animate={{ 
+              y: window.innerHeight + 50,
+              rotate: 360,
+              x: Math.random() * window.innerWidth
+            }}
+            transition={{ 
+              duration: 15 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            {['+', '−', '×', '÷', '=', '√', 'π', '∞'][i]}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Floating gaming elements */}
+      <div className="absolute top-4 left-4 z-10">
+        <motion.div
+          animate={{ 
+            y: [0, -10, 0],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Calculator className="w-8 h-8 text-battle-primary/60" />
+        </motion.div>
+      </div>
+
+      <div className="absolute top-4 right-4 z-10">
+        <motion.div
+          animate={{ 
+            y: [0, -10, 0],
+            rotate: [0, -5, 5, 0]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        >
+          <Brain className="w-8 h-8 text-battle-secondary/60" />
+        </motion.div>
+      </div>
+
       {/* Attack Animation Overlay */}
       <AttackAnimation
         fromPlayer={attackingPlayer}
         isVisible={showAttack}
         onComplete={() => setShowAttack(false)}
       />
-      {/* Shared container for player cards and question card */}
-      <div className="w-full max-w-3xl flex flex-col gap-4 flex-1 min-h-0 justify-center">
-        {/* Player Cards Row */}
-        <div className="flex flex-row gap-2 w-full mb-0">
+      
+      {/* Main game container - more compact layout */}
+      <div className="flex-1 flex flex-col justify-center items-center max-w-4xl mx-auto w-full relative z-10">
+        {/* Game header with current player indicator */}
+        <motion.div 
+          className="w-full mb-2 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Target className="w-5 h-5 text-battle-primary" />
+            </motion.div>
+            <span className="font-semibold text-sm">
+              {currentPlayer.name}'s Turn
+            </span>
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, -10, 10, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            >
+              <Star className="w-5 h-5 text-yellow-500" />
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Player Cards Row - reduced gap and margin */}
+        <div className="flex flex-row gap-1 sm:gap-2 w-full mb-3 sm:mb-4">
           <PlayerPanel
             player={gameState.players[0]}
             playerNumber={1}
@@ -171,8 +311,8 @@ export const BattleScreen = ({
           />
         </div>
 
-        {/* Large Question Card Centered, fits with player cards */}
-        <div className="w-full flex-1 flex justify-center items-center min-h-0">
+        {/* Question Card - positioned to fill available space */}
+        <div className="flex-1 flex justify-center items-center w-full min-h-0">
           <AnimatePresence mode="wait">
             <QuestionCard
               key={currentQuestion.id}
@@ -189,7 +329,7 @@ export const BattleScreen = ({
                   variant: type === "success" ? "default" : "destructive",
                 })
               }
-              cardWidthClass="w-full"
+              cardWidthClass="w-full max-w-2xl"
             />
           </AnimatePresence>
         </div>
