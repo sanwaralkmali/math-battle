@@ -120,54 +120,6 @@ export const BattleScreen = ({
   };
 
   if (!currentQuestion) {
-    if (gameState.gameMode === "sudden-death") {
-      return (
-        <div className="h-full flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
-          {/* Animated background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute text-4xl text-red-500/20"
-                initial={{ 
-                  x: Math.random() * window.innerWidth,
-                  y: -50,
-                  rotate: 0
-                }}
-                animate={{ 
-                  y: window.innerHeight + 50,
-                  rotate: 360,
-                  x: Math.random() * window.innerWidth
-                }}
-                transition={{ 
-                  duration: 8 + Math.random() * 4,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                ⚡
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="text-center relative z-10">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className="mb-4"
-            >
-              <Zap className="w-16 h-16 text-red-500 mx-auto" />
-            </motion.div>
-            <h2 className="text-3xl font-bold mb-4 text-red-600">
-              ⚡ Sudden Death! ⚡
-            </h2>
-            <p className="text-xl text-red-500 font-semibold">
-              Fastest answer wins!
-            </p>
-          </div>
-        </div>
-      );
-    }
     if (gameState.gameMode === "victory") {
       return null; // Parent will render VictoryScreen
     }
@@ -190,23 +142,23 @@ export const BattleScreen = ({
           <motion.div
             key={i}
             className="absolute text-2xl sm:text-3xl text-blue-400/10"
-            initial={{ 
+            initial={{
               x: Math.random() * window.innerWidth,
               y: -50,
-              rotate: 0
+              rotate: 0,
             }}
-            animate={{ 
+            animate={{
               y: window.innerHeight + 50,
               rotate: 360,
-              x: Math.random() * window.innerWidth
+              x: Math.random() * window.innerWidth,
             }}
-            transition={{ 
+            transition={{
               duration: 15 + Math.random() * 10,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           >
-            {['+', '−', '×', '÷', '=', '√', 'π', '∞'][i]}
+            {["+", "−", "×", "÷", "=", "√", "π", "∞"][i]}
           </motion.div>
         ))}
       </div>
@@ -214,14 +166,14 @@ export const BattleScreen = ({
       {/* Floating gaming elements */}
       <div className="absolute top-4 left-4 z-10">
         <motion.div
-          animate={{ 
+          animate={{
             y: [0, -10, 0],
-            rotate: [0, 5, -5, 0]
+            rotate: [0, 5, -5, 0],
           }}
-          transition={{ 
+          transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           <Calculator className="w-8 h-8 text-battle-primary/60" />
@@ -230,15 +182,15 @@ export const BattleScreen = ({
 
       <div className="absolute top-4 right-4 z-10">
         <motion.div
-          animate={{ 
+          animate={{
             y: [0, -10, 0],
-            rotate: [0, -5, 5, 0]
+            rotate: [0, -5, 5, 0],
           }}
-          transition={{ 
+          transition={{
             duration: 3,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
           }}
         >
           <Brain className="w-8 h-8 text-battle-secondary/60" />
@@ -251,48 +203,131 @@ export const BattleScreen = ({
         isVisible={showAttack}
         onComplete={() => setShowAttack(false)}
       />
-      
+
       {/* Main game container - more compact layout */}
       <div className="flex-1 flex flex-col justify-center items-center max-w-4xl mx-auto w-full relative z-10">
+        {/* Sudden Death Banner - Show prominently when in sudden death mode */}
+        {gameState.gameMode === "sudden-death" && (
+          <motion.div
+            className="w-full mb-4 text-center"
+            initial={{ opacity: 0, scale: 0.8, y: -50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, type: "spring" }}
+          >
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-lg shadow-lg border-2 border-red-300">
+              <div className="flex items-center justify-center gap-3">
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    rotate: [0, 15, -15, 0],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Zap className="w-6 h-6" />
+                </motion.div>
+                <div>
+                  <h3 className="font-bold text-lg">⚡ SUDDEN DEATH ⚡</h3>
+                  <p className="text-sm opacity-90">
+                    Fastest answer wins! One wrong answer = instant loss!
+                  </p>
+                </div>
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    rotate: [0, -15, 15, 0],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5,
+                  }}
+                >
+                  <Zap className="w-6 h-6" />
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Game header with current player indicator */}
-        <motion.div 
+        <motion.div
           className="w-full mb-2 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-            <motion.div
-              animate={{ 
-                scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Target className="w-5 h-5 text-battle-primary" />
-            </motion.div>
-            <span className="font-semibold text-sm">
-              {currentPlayer.name}'s Turn
-            </span>
-            <motion.div
-              animate={{ 
-                scale: [1, 1.2, 1],
-                rotate: [0, -10, 10, 0]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
-            >
-              <Star className="w-5 h-5 text-yellow-500" />
-            </motion.div>
-          </div>
+          {gameState.gameMode === "sudden-death" ? (
+            <div className="inline-flex items-center gap-2 bg-red-100/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border-2 border-red-300">
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Zap className="w-5 h-5 text-red-600" />
+              </motion.div>
+              <span className="font-semibold text-sm text-red-700">
+                ⚡ Sudden Death - {currentPlayer.name}'s Turn ⚡
+              </span>
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, -10, 10, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+              >
+                <Zap className="w-5 h-5 text-red-600" />
+              </motion.div>
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Target className="w-5 h-5 text-battle-primary" />
+              </motion.div>
+              <span className="font-semibold text-sm">
+                {currentPlayer.name}'s Turn
+              </span>
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, -10, 10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              >
+                <Star className="w-5 h-5 text-yellow-500" />
+              </motion.div>
+            </div>
+          )}
         </motion.div>
 
         {/* Player Cards Row - reduced gap and margin */}
@@ -301,12 +336,14 @@ export const BattleScreen = ({
             player={gameState.players[0]}
             playerNumber={1}
             isLastChance={gameState.lastChancePlayer === 0}
+            isSuddenDeath={gameState.gameMode === "sudden-death"}
             className="w-1/2 min-w-0"
           />
           <PlayerPanel
             player={gameState.players[1]}
             playerNumber={2}
             isLastChance={gameState.lastChancePlayer === 1}
+            isSuddenDeath={gameState.gameMode === "sudden-death"}
             className="w-1/2 min-w-0"
           />
         </div>
@@ -330,6 +367,7 @@ export const BattleScreen = ({
                 })
               }
               cardWidthClass="w-full max-w-2xl"
+              isSuddenDeath={gameState.gameMode === "sudden-death"}
             />
           </AnimatePresence>
         </div>

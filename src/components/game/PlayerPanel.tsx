@@ -6,6 +6,7 @@ interface PlayerPanelProps {
   player: Player;
   playerNumber: 1 | 2;
   isLastChance?: boolean;
+  isSuddenDeath?: boolean;
   className?: string;
 }
 
@@ -13,6 +14,7 @@ export const PlayerPanel = ({
   player,
   playerNumber,
   isLastChance = false,
+  isSuddenDeath = false,
   className = "",
 }: PlayerPanelProps) => {
   const playerColorClass = playerNumber === 1 ? "player-1" : "player-2";
@@ -34,7 +36,11 @@ export const PlayerPanel = ({
                     isLastChance
                       ? "ring-2 ring-battle-danger ring-opacity-75"
                       : ""
-                  } ${className} relative overflow-hidden`}
+                  } ${
+        isSuddenDeath
+          ? "ring-2 ring-red-500 ring-opacity-80 shadow-lg shadow-red-500/30"
+          : ""
+      } ${className} relative overflow-hidden`}
       animate={{
         scale: player.isActive ? 1.02 : 1,
         boxShadow: player.isActive
@@ -49,23 +55,23 @@ export const PlayerPanel = ({
           <motion.div
             key={i}
             className="absolute text-sm text-blue-300/20"
-            initial={{ 
+            initial={{
               x: Math.random() * 200,
               y: -20,
-              rotate: 0
+              rotate: 0,
             }}
-            animate={{ 
+            animate={{
               y: 150,
               rotate: 180,
-              x: Math.random() * 200
+              x: Math.random() * 200,
             }}
-            transition={{ 
+            transition={{
               duration: 8 + Math.random() * 4,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           >
-            {['⚔️', '🛡️', '⚡'][i]}
+            {["⚔️", "🛡️", "⚡"][i]}
           </motion.div>
         ))}
       </div>
@@ -81,14 +87,14 @@ export const PlayerPanel = ({
       >
         {player.isActive && (
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
-              rotate: [0, 10, -10, 0]
+              rotate: [0, 10, -10, 0],
             }}
-            transition={{ 
+            transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           >
             <Crown className="w-4 h-4 text-yellow-500" />
@@ -104,6 +110,24 @@ export const PlayerPanel = ({
           >
             ⚡
           </motion.span>
+        )}
+        {isSuddenDeath && (
+          <motion.div
+            className="ml-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex items-center gap-1">
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+              >
+                <Zap className="w-3 h-3" />
+              </motion.div>
+              <span className="font-bold">SD</span>
+            </div>
+          </motion.div>
         )}
       </motion.h3>
 
@@ -174,14 +198,14 @@ export const PlayerPanel = ({
         >
           <div className="flex items-center justify-center gap-1">
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0]
+                rotate: [0, 10, -10, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 1,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             >
               <Zap className="w-3 h-3 text-battle-danger" />
@@ -190,14 +214,14 @@ export const PlayerPanel = ({
               ⚠️ LAST CHANCE! ⚠️
             </p>
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1, 1.2, 1],
-                rotate: [0, -10, 10, 0]
+                rotate: [0, -10, 10, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 1,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             >
               <Shield className="w-3 h-3 text-battle-danger" />
@@ -210,14 +234,14 @@ export const PlayerPanel = ({
       {player.isActive && (
         <motion.div
           className="absolute top-1 right-1"
-          animate={{ 
+          animate={{
             scale: [1, 1.2, 1],
-            rotate: [0, 360]
+            rotate: [0, 360],
           }}
-          transition={{ 
+          transition={{
             duration: 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           <Sword className="w-4 h-4 text-battle-primary" />

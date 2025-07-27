@@ -17,6 +17,7 @@ interface QuestionCardProps {
   onFeedbackComplete?: (answer: number, correct: boolean) => void;
   showToast?: (msg: string, type: "success" | "error") => void;
   cardWidthClass?: string;
+  isSuddenDeath?: boolean;
 }
 
 export const QuestionCard = ({
@@ -30,6 +31,7 @@ export const QuestionCard = ({
   onFeedbackComplete,
   showToast,
   cardWidthClass = "",
+  isSuddenDeath = false,
 }: QuestionCardProps) => {
   const isLowTime = timeRemaining <= 5;
   const timePercentage = totalTime > 0 ? (timeRemaining / totalTime) * 100 : 0;
@@ -73,13 +75,37 @@ export const QuestionCard = ({
 
   return (
     <motion.div
-      className={`game-card p-3 sm:p-6 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto ${cardWidthClass} ${className} relative overflow-hidden mt-3`}
+      className={`game-card p-3 sm:p-6 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto ${cardWidthClass} ${className} relative overflow-hidden mt-3 ${
+        isSuddenDeath
+          ? "border-2 border-red-400 shadow-lg shadow-red-500/20"
+          : ""
+      }`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.5 }}
       key={question.id}
     >
+      {/* Sudden Death Indicator */}
+      {isSuddenDeath && (
+        <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-red-500 to-orange-500 text-white text-center py-2 px-4 transform -translate-y-full">
+          <div className="flex items-center justify-center gap-2">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            >
+              <Zap className="w-4 h-4" />
+            </motion.div>
+            <span className="font-bold text-sm">SUDDEN DEATH QUESTION</span>
+            <motion.div
+              animate={{ rotate: [0, -360] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            >
+              <Zap className="w-4 h-4" />
+            </motion.div>
+          </div>
+        </div>
+      )}
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(4)].map((_, i) => (

@@ -67,6 +67,12 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
               const skillResponse = await fetch(
                 `/data/questions/${skillName}.json`
               );
+              if (!skillResponse.ok) {
+                console.warn(
+                  `Failed to load skill: ${skillName} - HTTP ${skillResponse.status}`
+                );
+                continue;
+              }
               const skillData = await skillResponse.json();
               loadedSkills[skillName] = skillData;
             } catch (error) {
@@ -90,21 +96,35 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   const [filteredSkillKeys, setFilteredSkillKeys] = useState<string[]>([]);
   useEffect(() => {
     const fetchCategories = async () => {
-      const skillsResponse = await fetch("/data/skills.json");
-      const skillCategories = await skillsResponse.json();
+      try {
+        const skillsResponse = await fetch("/data/skills.json");
+        const skillCategories = await skillsResponse.json();
 
-      if (skillCategory && skillCategories[skillCategory]) {
-        const categorySkills = skillCategories[skillCategory];
-        setFilteredSkillKeys(categorySkills);
+        if (skillCategory && skillCategories[skillCategory]) {
+          const categorySkills = skillCategories[skillCategory];
+          // Only show skills that are actually loaded
+          const availableSkills = categorySkills.filter(
+            (skillName: string) => skills[skillName]
+          );
+          setFilteredSkillKeys(availableSkills);
 
-        // Auto-select if only one skill in category
-        if (categorySkills.length === 1) {
-          setSelectedSkill(categorySkills[0]);
+          // Auto-select if only one skill in category
+          if (availableSkills.length === 1) {
+            setSelectedSkill(availableSkills[0]);
+          }
+        } else {
+          // Show all available skills if no category
+          const allSkillKeys = Object.values(
+            skillCategories
+          ).flat() as string[];
+          const availableSkills = allSkillKeys.filter(
+            (skillName: string) => skills[skillName]
+          );
+          setFilteredSkillKeys(availableSkills);
         }
-      } else {
-        // Show all skills if no category
-        const allSkillKeys = Object.values(skillCategories).flat() as string[];
-        setFilteredSkillKeys(allSkillKeys);
+      } catch (error) {
+        console.error("Failed to fetch skill categories:", error);
+        setFilteredSkillKeys([]);
       }
     };
     fetchCategories();
@@ -134,6 +154,30 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="w-16 h-16 border-4 border-battle-primary border-t-transparent rounded-full"
         />
+      </div>
+    );
+  }
+
+  // Show error if no skills are available
+  if (filteredSkillKeys.length === 0) {
+    return (
+      <div className="h-full flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-orange-50">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4 text-red-600">
+            No skills available
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            {skillCategory
+              ? `No skills found for category: ${skillCategory}`
+              : "Failed to load any skills. Please try refreshing the page."}
+          </p>
+          <Button
+            onClick={() => window.location.reload()}
+            className="battle-gradient"
+          >
+            Refresh Page
+          </Button>
+        </div>
       </div>
     );
   }

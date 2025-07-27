@@ -48,7 +48,9 @@ export const useGameState = () => {
     }
     mainQuestions.sort((a, b) => ((a as RawQuestion).wave || 1) - ((b as RawQuestion).wave || 1));
 
-    const suddenDeathQuestions = shuffleArray(waves[4] || []).slice(0, SUDDEN_DEATH_QUESTIONS);
+    // Select 2 questions from wave 4 for sudden death (one for each player)
+    const wave4Questions = shuffleArray(waves[4] || []);
+    const suddenDeathQuestions = wave4Questions.slice(0, SUDDEN_DEATH_QUESTIONS);
 
     const allRawQuestions = [...mainQuestions, ...suddenDeathQuestions];
     
@@ -188,18 +190,63 @@ export const useGameState = () => {
 
       // --- SUDDEN DEATH LOGIC ---
       if (prev.gameMode === 'sudden-death') {
-        newPlayers[currentPlayerIndex] = { ...newPlayers[currentPlayerIndex], answerTime: timeTaken };
         if (!isCorrect) {
-          // Wrong answer in sudden death = instant loss
-          newWinner = newPlayers[opponentIndex];
-          newGameMode = 'victory';
-        } else if (prev.currentQuestionIndex === MAX_QUESTIONS + SUDDEN_DEATH_QUESTIONS - 1) {
-          // Last sudden death question, compare times
-          const p1Time = newPlayers[0].answerTime || Infinity;
-          const p2Time = newPlayers[1].answerTime || Infinity;
-          newWinner = p1Time < p2Time ? newPlayers[0] : newPlayers[1];
-          newGameMode = 'victory';
+          // Wrong answer in sudden death - mark with -1
+          newPlayers[currentPlayerIndex] = { ...newPlayers[currentPlayerIndex], answerTime: -1 };
+          
+          // Check if both players have answered
+          const p1Answered = newPlayers[0].answerTime !== undefined;
+          const p2Answered = newPlayers[1].answerTime !== undefined;
+          
+          if (p1Answered && p2Answered) {
+            // Both players have answered, check if both were wrong
+            const p1WasWrong = newPlayers[0].answerTime === -1;
+            const p2WasWrong = newPlayers[1].answerTime === -1;
+            
+            if (p1WasWrong && p2WasWrong) {
+              // Both players answered incorrectly - it's a tie, no winner
+              newWinner = undefined;
+              newGameMode = 'victory';
+            } else {
+              // Only current player was wrong, opponent wins
+              newWinner = newPlayers[opponentIndex];
+              newGameMode = 'victory';
+            }
+          }
+          // If not both answered yet, continue to next player
+        } else {
+          // Correct answer - record the time
+          newPlayers[currentPlayerIndex] = { ...newPlayers[currentPlayerIndex], answerTime: timeTaken };
+          
+          // Check if both players have answered
+          const p1Answered = newPlayers[0].answerTime !== undefined;
+          const p2Answered = newPlayers[1].answerTime !== undefined;
+          
+          if (p1Answered && p2Answered) {
+            // Both players have answered, check if both were correct
+            const p1WasCorrect = newPlayers[0].answerTime !== -1;
+            const p2WasCorrect = newPlayers[1].answerTime !== -1;
+            
+            if (p1WasCorrect && p2WasCorrect) {
+              // Both players answered correctly, compare times
+              const p1Time = newPlayers[0].answerTime || Infinity;
+              const p2Time = newPlayers[1].answerTime || Infinity;
+              newWinner = p1Time < p2Time ? newPlayers[0] : newPlayers[1];
+              newGameMode = 'victory';
+            } else if (p1WasCorrect && !p2WasCorrect) {
+              // Only Player 1 was correct
+              newWinner = newPlayers[0];
+              newGameMode = 'victory';
+            } else if (!p1WasCorrect && p2WasCorrect) {
+              // Only Player 2 was correct
+              newWinner = newPlayers[1];
+              newGameMode = 'victory';
+            }
+            // If neither was correct, it's already handled above
+          }
+          // If not both answered yet, continue to next player
         }
+        
         // Move to next turn or end game
         const nextPlayerIndex = 1 - currentPlayerIndex;
         const nextQuestionIndex = prev.currentQuestionIndex + 1;
@@ -271,7 +318,9 @@ export const useGameState = () => {
             newGameMode = 'victory';
           } else {
             // Tie in lives and score, start sudden death
-        newGameMode = 'sudden-death';
+            newGameMode = 'sudden-death';
+            // Reset answer times for sudden death
+            newPlayers = newPlayers.map(player => ({ ...player, answerTime: undefined })) as [Player, Player];
           }
         }
       }
