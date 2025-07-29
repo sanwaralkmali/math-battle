@@ -5,6 +5,8 @@ import { Question } from "@/types/game";
 import { Clock, Zap, Target, Star, Trophy, Brain } from "lucide-react";
 import { useState } from "react";
 import React from "react";
+import { Latex } from "@/components/ui/latex";
+import { toast } from "sonner";
 
 interface QuestionCardProps {
   question: Question;
@@ -58,9 +60,24 @@ export const QuestionCard = ({
       if (isCorrect) {
         showToast("Correct!", "success");
       } else {
-        showToast(
-          `Wrong! The correct answer is ${question.options[question.correct]}`,
-          "error"
+        // Use custom toast for LaTeX rendering
+        toast.error(
+          <div className="flex items-center gap-2">
+            <span>Wrong! The correct answer is</span>
+            <Latex>{question.options[question.correct]}</Latex>
+          </div>
+        );
+      }
+    } else {
+      // Fallback if no showToast provided
+      if (isCorrect) {
+        toast.success("Correct!");
+      } else {
+        toast.error(
+          <div className="flex items-center gap-2">
+            <span>Wrong! The correct answer is</span>
+            <Latex>{question.options[question.correct]}</Latex>
+          </div>
         );
       }
     }
@@ -214,7 +231,7 @@ export const QuestionCard = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        {question.question}
+        <Latex>{question.question}</Latex>
       </motion.h2>
 
       {/* Answer Options - vertical stack */}
@@ -268,7 +285,7 @@ export const QuestionCard = ({
                   {String.fromCharCode(65 + index)}
                 </span>
                 <span className="break-words whitespace-normal relative z-10">
-                  {option}
+                  <Latex>{option}</Latex>
                 </span>
               </Button>
             </motion.div>

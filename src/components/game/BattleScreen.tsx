@@ -7,6 +7,7 @@ import { GameState } from "@/types/game";
 import { useGameState } from "@/hooks/useGameState";
 import { useToast } from "@/hooks/use-toast";
 import { Zap, Target, Trophy, Star, Calculator, Brain } from "lucide-react";
+import { Latex } from "@/components/ui/latex";
 
 interface BattleScreenProps {
   gameState: GameState;
@@ -362,7 +363,7 @@ export const BattleScreen = ({
               onFeedbackComplete={handleFeedbackComplete}
               showToast={(msg, type) =>
                 toast({
-                  description: msg,
+                  description: <Latex>{msg}</Latex>,
                   variant: type === "success" ? "default" : "destructive",
                 })
               }
