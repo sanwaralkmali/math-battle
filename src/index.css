@@ -171,4 +171,15 @@
   .heart-animation {
     animation: heart-beat 0.6s ease-in-out infinite;
   }
+
+  /* MATHLOGAME Footer Styles */
+  .mathlogame-logo {
+    font-family: 'Cairo', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background: linear-gradient(135deg, #4BB3FD 0%, #10B981 50%, #4BB3FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }

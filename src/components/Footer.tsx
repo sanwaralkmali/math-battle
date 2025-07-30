@@ -1,20 +1,21 @@
 import React from "react";
 
 const Footer = () => (
-  <footer className="w-full py-2 sm:py-3 text-center text-xs sm:text-sm text-muted-foreground border-t bg-background/80 backdrop-blur-sm font-cairo">
-    <div className="container mx-auto px-2">
-      <p>
-        Educational Game 2025 | Created for Educational purposes By{" "}
-        <a
-          href="https://sanwaralkmali.github.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline font-semibold"
-        >
-          Salah Alkmali
-        </a>
-      </p>
-    </div>
+  <footer className="w-full py-4 text-center text-sm text-muted-foreground border-t bg-background/80 backdrop-blur-sm font-cairo flex-shrink-0">
+    <a
+      href="https://sanwaralkmali.github.io/mathlogame"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center gap-2 hover:opacity-80 transition-opacity"
+    >
+      <img
+        src="/MATHLOGAME-light.png"
+        alt="MATHLOGAME"
+        className="h-12 w-auto"
+      />
+      Powered by
+      <span className="mathlogame-logo"> MATHLOGAME</span>
+    </a>
   </footer>
 );
 

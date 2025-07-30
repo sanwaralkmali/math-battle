@@ -1,0 +1,12 @@
+# MATHLOGAME.png Placeholder
+# 
+# This is a placeholder file for the MATHLOGAME logo.
+# Replace this file with the actual MATHLOGAME.png logo image.
+# 
+# The logo should be:
+# - PNG format
+# - Approximately 120x40 pixels or similar aspect ratio
+# - Transparent background preferred
+# - Should match the gradient colors: #4BB3FD to #10B981
+# 
+# Current implementation uses the SVG version as fallback. 

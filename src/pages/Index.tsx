@@ -4,6 +4,39 @@ import { MathBattleGame } from "@/components/MathBattleGame";
 import NotFound from "./NotFound";
 import Footer from "@/components/Footer";
 
+// Pre-define valid skills to avoid network requests
+const VALID_SKILLS = [
+  "integers",
+  "fractions", 
+  "decimals",
+  "order-of-operations",
+  "mixed-problems",
+  "algebra-basics",
+  "fraction-decimal",
+  "fraction-percentage",
+  "decimal-percentage",
+  "mixed-conversion",
+  "classification-numbers",
+  "basic-scientific-notation",
+  "operations-scientific-notation",
+  "simplify-expressions",
+  "solving-equations",
+  "solving-inequalities",
+  "gcf-factoring",
+  "factoring-by-grouping",
+  "factoring-trinomials-1",
+  "factoring-trinomials-2",
+  "perfect-squares",
+  "difference-squares",
+  "difference-sum-of-cubes",
+  "solving-equations-by-factoring",
+  "quadratic-formula",
+  "understanding-polynomials",
+  "adding-subtracting-polynomials",
+  "multiplying-polynomials",
+  "temp"
+];
+
 const Index = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -11,7 +44,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const validateSkill = async () => {
+    const validateSkill = () => {
       try {
         // Parse query parameter for skill
         const params = new URLSearchParams(location.search);
@@ -24,15 +57,8 @@ const Index = () => {
           return;
         }
 
-        // Load skills data to validate
-        const skillsResponse = await fetch("/data/skills.json");
-        const skillCategories = await skillsResponse.json();
-
-        // Check if the skill exists in any category
-        const skillExists = Object.values(skillCategories).some(
-          (category: any) =>
-            Array.isArray(category) && category.includes(skillParam)
-        );
+        // Check if the skill exists in our pre-defined list
+        const skillExists = VALID_SKILLS.includes(skillParam);
 
         setIsValidSkill(skillExists);
         setLoading(false);
@@ -43,7 +69,11 @@ const Index = () => {
       }
     };
 
-    validateSkill();
+    // Use setTimeout to ensure this runs after the component mounts
+    // This prevents blocking the initial render
+    const timer = setTimeout(validateSkill, 0);
+    
+    return () => clearTimeout(timer);
   }, [location.search]);
 
   if (loading) {
