@@ -1,0 +1,445 @@
+{
+  "title": "Understanding Polynomial Terminology",
+  "description": "A quiz to test your understanding of polynomial terminology.",
+  "waves": 5,
+  "timePerQuestion": 90,
+  "questions": [
+    {
+      "id": 1,
+      "wave": 1,
+      "question": "How many terms are in $7x + 4$?",
+      "choices": ["1", "2", "3", "4"],
+      "answer": "2",
+      "points": 10
+    },
+    {
+      "id": 2,
+      "wave": 1,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 3,
+      "wave": 1,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 5,
+      "wave": 1,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 6,
+      "wave": 1,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 7,
+      "wave": 1,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 11,
+      "wave": 2,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 30,
+      "wave": 2,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 12,
+      "wave": 2,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 13,
+      "wave": 2,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 14,
+      "wave": 2,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 15,
+      "wave": 3,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 16,
+      "wave": 3,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 26,
+      "wave": 3,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 28,
+      "wave": 3,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 26449,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 25449,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 246449,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 25449,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 23249,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 242149,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 265449,
+      "wave": 4,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 24649,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 2445329,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 265449,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 24469,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 24979,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 26949,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 25449,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 2749,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 2469,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 142,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 365,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    },
+    {
+      "id": 555,
+      "wave": 5,
+      "question": "Write the polynomial $y^5 - 2y^2 + 7y^3 - 10$ in standard form and state its leading coefficient.",
+      "choices": [
+        "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+        "$-10 - 2y^2 + 7y^3 + y^5$, Leading coefficient -10",
+        "$7y^3 + y^5 - 2y^2 - 10$, Leading coefficient 7",
+        "$y^5 - 2y^2 + 7y^3 - 10$, Leading coefficient 1"
+      ],
+      "answer": "$y^5 + 7y^3 - 2y^2 - 10$, Leading coefficient 1",
+      "points": 30
+    }
+  ]
+}

@@ -27,7 +27,12 @@ export const VictoryScreen = ({
 
   const isTie = !gameState.winner;
   const winner = gameState.winner;
-  const loser = winner ? gameState.players.find((p) => p !== winner)! : null;
+  // Fix: Use index-based approach to ensure correct loser determination
+  const winnerIndex = winner
+    ? gameState.players.findIndex((p) => p.name === winner.name)
+    : -1;
+  const loser =
+    winner && winnerIndex !== -1 ? gameState.players[1 - winnerIndex] : null;
 
   // Update leaderboard
   useEffect(() => {
@@ -280,7 +285,7 @@ export const VictoryScreen = ({
                           SD Time:{" "}
                           <span className="font-bold text-red-500">
                             {gameState.players[0].answerTime === -1
-                              ? "Wrong"
+                              ? "Wrong Answer"
                               : `${gameState.players[0].answerTime.toFixed(
                                   2
                                 )}s`}
@@ -323,7 +328,7 @@ export const VictoryScreen = ({
                           SD Time:{" "}
                           <span className="font-bold text-red-500">
                             {gameState.players[1].answerTime === -1
-                              ? "Wrong"
+                              ? "Wrong Answer"
                               : `${gameState.players[1].answerTime.toFixed(
                                   2
                                 )}s`}
@@ -372,7 +377,9 @@ export const VictoryScreen = ({
                         <div className="mt-1 text-xs text-muted-foreground">
                           SD Time:{" "}
                           <span className="font-bold text-battle-success">
-                            {winner.answerTime.toFixed(2)}s
+                            {winner.answerTime === -1
+                              ? "Wrong Answer"
+                              : `${winner.answerTime.toFixed(2)}s`}
                           </span>
                         </div>
                       )}
@@ -417,7 +424,9 @@ export const VictoryScreen = ({
                         <div className="mt-1 text-xs text-muted-foreground">
                           SD Time:{" "}
                           <span className="font-bold">
-                            {loser.answerTime.toFixed(2)}s
+                            {loser.answerTime === -1
+                              ? "Wrong Answer"
+                              : `${loser.answerTime.toFixed(2)}s`}
                           </span>
                         </div>
                       )}
@@ -427,16 +436,16 @@ export const VictoryScreen = ({
               )}
             </div>
 
-            {/* Game Details */}
+            {/* Game Details - Fixed mobile layout */}
             <motion.div
               className="mt-4 p-3 sm:p-4 bg-muted/20 rounded-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 text-center game-details-grid">
                 <div>
-                  <p className="text-xs text-muted-foreground">Duration</p>
+                  <p className="text-xs text-muted-foreground">Game Time</p>
                   <p className="font-mono font-semibold text-sm sm:text-base">
                     {formatTime(gameDuration)}
                   </p>
@@ -447,9 +456,9 @@ export const VictoryScreen = ({
                     {gameState.currentQuestionIndex + 1}
                   </p>
                 </div>
-                <div>
+                <div className="sm:col-span-1">
                   <p className="text-xs text-muted-foreground">Subject</p>
-                  <p className="font-semibold text-sm sm:text-base truncate">
+                  <p className="font-semibold text-sm sm:text-base break-words line-clamp-2">
                     {gameState.skill?.title}
                   </p>
                 </div>

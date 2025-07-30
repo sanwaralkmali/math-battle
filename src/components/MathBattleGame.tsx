@@ -1,29 +1,47 @@
-import { useState, useEffect } from 'react';
-import { useGameState } from '@/hooks/useGameState';
-import { GameSetup } from './game/GameSetup';
-import { BattleScreen } from './game/BattleScreen';
-import { VictoryScreen } from './game/VictoryScreen';
-import { Skill } from '@/types/game';
+import { useState, useEffect } from "react";
+import { useGameState } from "@/hooks/useGameState";
+import { GameSetup } from "./game/GameSetup";
+import { BattleScreen } from "./game/BattleScreen";
+import { VictoryScreen } from "./game/VictoryScreen";
+import { Skill } from "@/types/game";
 
 export const MathBattleGame = () => {
-  const { gameState, initializeGame, handleAnswer, resetGame, decrementTimer, triggerMissedAttack } = useGameState();
+  const {
+    gameState,
+    initializeGame,
+    handleAnswer,
+    resetGame,
+    decrementTimer,
+    triggerMissedAttack,
+  } = useGameState();
   const [gameStartTime, setGameStartTime] = useState<number>(0);
   const [gameDuration, setGameDuration] = useState<number>(0);
 
-  // Track game duration
+  // Track game duration - start when the game actually begins (questions are loaded)
   useEffect(() => {
-    if (gameState.gameMode === 'battle' && gameStartTime === 0) {
+    // Start tracking when we have questions loaded and the game is active
+    if (
+      (gameState.gameMode === "battle" ||
+        gameState.gameMode === "sudden-death") &&
+      gameState.questions.length > 0 &&
+      gameStartTime === 0
+    ) {
       setGameStartTime(Date.now());
     }
-  }, [gameState.gameMode, gameStartTime]);
+  }, [gameState.gameMode, gameState.questions.length, gameStartTime]);
 
+  // Calculate duration when game ends
   useEffect(() => {
-    if (gameState.gameMode === 'victory' && gameStartTime > 0) {
+    if (gameState.gameMode === "victory" && gameStartTime > 0) {
       setGameDuration(Math.floor((Date.now() - gameStartTime) / 1000));
     }
   }, [gameState.gameMode, gameStartTime]);
 
-  const handleStartGame = (player1Name: string, player2Name: string, skill: Skill) => {
+  const handleStartGame = (
+    player1Name: string,
+    player2Name: string,
+    skill: Skill
+  ) => {
     initializeGame(player1Name, player2Name, skill);
     setGameStartTime(0);
     setGameDuration(0);
@@ -46,30 +64,30 @@ export const MathBattleGame = () => {
   };
 
   switch (gameState.gameMode) {
-    case 'setup':
+    case "setup":
       return <GameSetup onStartGame={handleStartGame} />;
-    
-    case 'battle':
-    case 'sudden-death':
+
+    case "battle":
+    case "sudden-death":
       return (
-        <BattleScreen 
-          gameState={gameState} 
+        <BattleScreen
+          gameState={gameState}
           onAnswer={handleAnswer}
           decrementTimer={decrementTimer}
           triggerMissedAttack={triggerMissedAttack}
         />
       );
-    
-    case 'victory':
+
+    case "victory":
       return (
-        <VictoryScreen 
+        <VictoryScreen
           gameState={gameState}
           onRematch={handleRematch}
           onReturnHome={handleReturnHome}
           gameDuration={gameDuration}
         />
       );
-    
+
     default:
       return <GameSetup onStartGame={handleStartGame} />;
   }
