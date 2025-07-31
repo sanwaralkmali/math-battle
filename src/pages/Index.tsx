@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 // Pre-define valid skills to avoid network requests
 const VALID_SKILLS = [
   "integers",
-  "fractions", 
+  "fractions",
   "decimals",
   "order-of-operations",
   "mixed-problems",
@@ -34,7 +34,6 @@ const VALID_SKILLS = [
   "understanding-polynomials",
   "adding-subtracting-polynomials",
   "multiplying-polynomials",
-  "temp"
 ];
 
 const Index = () => {
@@ -72,7 +71,7 @@ const Index = () => {
     // Use setTimeout to ensure this runs after the component mounts
     // This prevents blocking the initial render
     const timer = setTimeout(validateSkill, 0);
-    
+
     return () => clearTimeout(timer);
   }, [location.search]);
 

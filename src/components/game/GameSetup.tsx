@@ -36,35 +36,34 @@ interface GameSetupProps {
 
 // Pre-define skill categories to avoid network requests
 const SKILL_CATEGORIES = {
-  integers: ["integers"],
-  fractions: ["fractions"],
-  decimals: ["decimals"],
-  "order-of-operations": ["order-of-operations"],
-  "mixed-problems": ["mixed-problems"],
-  "algebra-basics": ["algebra-basics"],
-  "fraction-decimal": ["fraction-decimal"],
-  "fraction-percentage": ["fraction-percentage"],
-  "decimal-percentage": ["decimal-percentage"],
-  "mixed-conversion": ["mixed-conversion"],
-  "classification-numbers": ["classification-numbers"],
-  "basic-scientific-notation": ["basic-scientific-notation"],
-  "operations-scientific-notation": ["operations-scientific-notation"],
-  "simplify-expressions": ["simplify-expressions"],
-  "solving-equations": ["solving-equations"],
-  "solving-inequalities": ["solving-inequalities"],
-  "gcf-factoring": ["gcf-factoring"],
-  "factoring-by-grouping": ["factoring-by-grouping"],
-  "factoring-trinomials-1": ["factoring-trinomials-1"],
-  "factoring-trinomials-2": ["factoring-trinomials-2"],
-  "perfect-squares": ["perfect-squares"],
-  "difference-squares": ["difference-squares"],
-  "difference-sum-of-cubes": ["difference-sum-of-cubes"],
-  "solving-equations-by-factoring": ["solving-equations-by-factoring"],
-  "quadratic-formula": ["quadratic-formula"],
-  "understanding-polynomials": ["understanding-polynomials"],
-  "adding-subtracting-polynomials": ["adding-subtracting-polynomials"],
-  "multiplying-polynomials": ["multiplying-polynomials"],
-  temp: ["temp"],
+  integers: ["1-integers.json"],
+  fractions: ["5-fractions-operations.json"],
+  decimals: ["6-decimals.json"],
+  "mixed-problems": ["7-mixed-problems.json"],
+  "order-of-operations": ["8-order-of-operations.json"],
+  "algebra-basics": ["9-algebra-basics.json"],
+  "fraction-decimal": ["2-fraction-decimal.json"],
+  "fraction-percentage": ["3-fraction-percentage.json"],
+  "decimal-percentage": ["4-decimal-percentage.json"],
+  "mixed-conversion": ["10-mixed-conversion.json"],
+  "basic-scientific-notation": ["11-basic-scientific-notation.json"],
+  "operations-scientific-notation": ["13-operations-scientific-notation.json"],
+  "classification-numbers": ["12-classification-numbers.json"],
+  "simplify-expressions": ["14-simplify-expressions.json"],
+  "solving-equations": ["15-solving-equations.json"],
+  "solving-inequalities": ["16-solving-inequalities.json"],
+  "gcf-factoring": ["17-gcf-factoring.json"],
+  "factoring-by-grouping": ["23-factoring-by-grouping.json"],
+  "factoring-trinomials-1": ["18-factoring-trinomials-1.json"],
+  "factoring-trinomials-2": ["24-factoring-trinomials-2.json"],
+  "difference-squares": ["19-difference-squares.json"],
+  "difference-sum-of-cubes": ["25-difference-sum-of-cubes.json"],
+  "perfect-squares": ["26-perfect-squares.json"],
+  "solving-equations-by-factoring": ["20-solving-equations-by-factoring.json"],
+  "quadratic-formula": ["27-quadratic-formula.json"],
+  "understanding-polynomials": ["21-understanding-polynomials.json"],
+  "adding-subtracting-polynomials": ["22-adding-subtracting-polynomials.json"],
+  "multiplying-polynomials": ["28-multiplying-polynomials.json"],
 };
 
 export const GameSetup = ({ onStartGame }: GameSetupProps) => {
@@ -72,6 +71,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   const [player2Name, setPlayer2Name] = useState("");
   const [selectedSkill, setSelectedSkill] = useState<string>("");
   const [skills, setSkills] = useState<Record<string, Skill>>({});
+  const [skillTitles, setSkillTitles] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [skillCategory, setSkillCategory] = useState<string | null>(null);
 
@@ -89,10 +89,10 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
   useEffect(() => {
     const getFilteredSkills = () => {
       if (skillCategory) {
-        // Filter to only show the selected skill
-        const categorySkills =
-          SKILL_CATEGORIES[skillCategory as keyof typeof SKILL_CATEGORIES] ||
-          [];
+        // Filter to only show the selected skill category
+        const categorySkills = Object.keys(SKILL_CATEGORIES).filter(
+          (skillName) => skillName === skillCategory
+        );
         setFilteredSkillKeys(categorySkills);
 
         // Auto-select if only one skill in category
@@ -101,7 +101,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
         }
       } else {
         // Show all available skills
-        const allSkills = Object.values(SKILL_CATEGORIES).flat();
+        const allSkills = Object.keys(SKILL_CATEGORIES);
         setFilteredSkillKeys(allSkills);
       }
     };
@@ -118,9 +118,15 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
     const loadSkill = async () => {
       setLoading(true);
       try {
-        const skillResponse = await fetch(
-          `/data/questions/${selectedSkill}.json`
-        );
+        // Get the actual file name from SKILL_CATEGORIES
+        const skillFileName =
+          SKILL_CATEGORIES[selectedSkill as keyof typeof SKILL_CATEGORIES]?.[0];
+        if (!skillFileName) {
+          console.warn(`No file found for skill: ${selectedSkill}`);
+          return;
+        }
+
+        const skillResponse = await fetch(`/data/questions/${skillFileName}`);
         if (!skillResponse.ok) {
           console.warn(
             `Failed to load skill: ${selectedSkill} - HTTP ${skillResponse.status}`
@@ -129,6 +135,11 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
         }
         const skillData = await skillResponse.json();
         setSkills((prev) => ({ ...prev, [selectedSkill]: skillData }));
+        // Store the title from the JSON file
+        setSkillTitles((prev) => ({
+          ...prev,
+          [selectedSkill]: skillData.title,
+        }));
       } catch (error) {
         console.warn(`Failed to load skill: ${selectedSkill}`, error);
       } finally {
@@ -138,6 +149,53 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
 
     loadSkill();
   }, [selectedSkill, skills]);
+
+  // Load titles for all visible skills
+  useEffect(() => {
+    const loadSkillTitles = async () => {
+      console.log("Loading titles for skills:", filteredSkillKeys);
+      for (const skillName of filteredSkillKeys) {
+        // Skip if title already loaded
+        if (skillTitles[skillName]) {
+          console.log(
+            `Title already loaded for ${skillName}:`,
+            skillTitles[skillName]
+          );
+          continue;
+        }
+
+        try {
+          const skillFileName =
+            SKILL_CATEGORIES[skillName as keyof typeof SKILL_CATEGORIES]?.[0];
+          if (!skillFileName) {
+            console.warn(`No file found for skill: ${skillName}`);
+            continue;
+          }
+
+          console.log(
+            `Loading title for ${skillName} from file: ${skillFileName}`
+          );
+          const skillResponse = await fetch(`/data/questions/${skillFileName}`);
+          if (!skillResponse.ok) {
+            console.warn(
+              `Failed to load title for ${skillName}: HTTP ${skillResponse.status}`
+            );
+            continue;
+          }
+
+          const skillData = await skillResponse.json();
+          console.log(`Loaded title for ${skillName}:`, skillData.title);
+          setSkillTitles((prev) => ({ ...prev, [skillName]: skillData.title }));
+        } catch (error) {
+          console.warn(`Failed to load title for skill: ${skillName}`, error);
+        }
+      }
+    };
+
+    if (filteredSkillKeys.length > 0) {
+      loadSkillTitles();
+    }
+  }, [filteredSkillKeys]); // Removed skillTitles from dependency to prevent infinite loops
 
   const handleStartGame = () => {
     if (!selectedSkill || !skills[selectedSkill]) {
@@ -181,7 +239,6 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
       "understanding-polynomials": <Users className="w-4 h-4" />,
       "adding-subtracting-polynomials": <Sparkles className="w-4 h-4" />,
       "multiplying-polynomials": <Sparkles className="w-4 h-4" />,
-      temp: <Trophy className="w-4 h-4" />,
     };
     return icons[skillName] || <Target className="w-4 h-4" />;
   };
@@ -227,13 +284,28 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
         "bg-indigo-100 text-indigo-800 border-indigo-200",
       "multiplying-polynomials":
         "bg-indigo-100 text-indigo-800 border-indigo-200",
-      temp: "bg-gray-100 text-gray-800 border-gray-200",
     };
     return colors[skillName] || "bg-gray-100 text-gray-800 border-gray-200";
   };
 
+  const getSkillTitle = (skillName: string) => {
+    // Return the title from the JSON file if available, otherwise fall back to formatted skill name
+    const title = skillTitles[skillName];
+    if (title) {
+      console.log(`Using loaded title for ${skillName}:`, title);
+      return title;
+    }
+    // Fallback to formatted skill name
+    const fallbackTitle = skillName
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    console.log(`Using fallback title for ${skillName}:`, fallbackTitle);
+    return fallbackTitle;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -321,13 +393,7 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
                         <div className="flex items-center gap-2">
                           {getSkillIcon(skillName)}
                           <span className="font-semibold text-sm">
-                            {skillName
-                              .split("-")
-                              .map(
-                                (word) =>
-                                  word.charAt(0).toUpperCase() + word.slice(1)
-                              )
-                              .join(" ")}
+                            {getSkillTitle(skillName)}
                           </span>
                         </div>
                       </button>
